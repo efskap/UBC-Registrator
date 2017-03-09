@@ -6,19 +6,6 @@ import requests, re
 timeout = 10
 
 
-# ***** CONFIG HERE *** #
-# backup is a course you're already registered in, but wish to swap out for another
-username = "YOUR CWL USERNAME"
-password = "YOUR CWL PASSWORD"
-needed = [
-    Section("CPSC", 213, 101),
-    Section("SCAN", 335, "001"),
-    Section("CPSC", 221, "L1A"),
-    Section("CPSC", 221, 101, backup=Section("CPSC", 221, "1W1")),
-    Section("MATH", "200", "102", backup=Section("MATH", 200, "101"))
-
-]
-# ********
 class Section:
     def __init__(self, dept, course, section, session=None, backup=None):
         self.dept = dept
@@ -87,6 +74,19 @@ class Section:
     def __str__(self):
         return self.dept + "|" + self.course + "|" + self.section + ("*" if self.backup is not None else "")
 
+# ***** CONFIG HERE *** #
+# backup is a course you're already registered in, but wish to swap out for another
+username = "YOUR CWL USERNAME"
+password = "YOUR CWL PASSWORD"
+needed = [
+    Section("CPSC", 213, 101),
+    Section("SCAN", 335, "001"),
+    Section("CPSC", 221, "L1A"),
+    Section("CPSC", 221, 101, backup=Section("CPSC", 221, "1W1")),
+    Section("MATH", "200", "102", backup=Section("MATH", 200, "101"))
+
+]
+# ********
 
 def is_logged_in(session):
     url = "https://cas.id.ubc.ca/ubc-cas/login"
